@@ -20,7 +20,7 @@ import geni.rspec.igext as ig
 
 
 class GLOBALS:
-    UBUNTU18_IMG = "urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU18-64-STD"
+    UBUNTU18_IMG = "urn:publicid:IDN+emulab.net+image+PowderTeam:U18LL-SRSLTE:3"
     DLHIFREQ = 2630.0
     DLLOFREQ = 2620.0
     ULHIFREQ = 2510.0
