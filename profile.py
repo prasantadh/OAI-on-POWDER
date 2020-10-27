@@ -12,11 +12,11 @@ Instructions:
 # https://gitlab.flux.utah.edu/powder-profiles/ota_srslte/-/tree/master
 
 # import the portal object
-from geni.portal import portal
-from geni.rspec.pg as rspec
+import geni.portal as portal
+import geni.rspec.pg as rspec
 import geni.rspec.emulab.pnext as pn
 import geni.rspec.igext as ig
-import geni.rspec.emulab.spectrum as spectru
+# import geni.rspec.emulab.spectrum as spectrum
 
 
 class GLOBALS:
