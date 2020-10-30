@@ -7,9 +7,12 @@ Instructions:
     SSH via the given ports.
     We will update the instructions with scripts to be run once finalized.
 """
-
+#
 # The following code is inspired by and based on
 # https://gitlab.flux.utah.edu/powder-profiles/ota_srslte/-/tree/master
+# for the general code template and
+# https://gitlab.flux.utah.edu/powder-profiles/OAI-NR.git
+# for using the specific resource used in simpler format
 
 # import the portal object
 import geni.portal as portal
