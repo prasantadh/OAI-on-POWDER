@@ -20,18 +20,21 @@ import geni.rspec.igext as ig
 
 
 class GLOBALS:
-    UBUNTU18_IMG = "urn:publicid:IDN+emulab.net+image+PowderTeam:U18LL-SRSLTE:3"
+    SRSLTE_IMG = "urn:publicid:IDN+emulab.net+image+PowderTeam:U18LL-SRSLTE:N"
     DLHIFREQ = 2630.0
     DLLOFREQ = 2620.0
     ULHIFREQ = 2510.0
     ULLOFREQ = 2500.0
 
+pc = portal.Context()
+pc.verifyParameters()
+
 # create a request object to start building the RSpec
 request = portal.context.makeRequestRSpec()
-params  = portal.context.bindParameters()
 
-node = request.RawPC("node")
-node.disk_image = GLOBALS.UBUNTU18_IMG
+# request the gnb
+gnb = request.RawPC("node")
+gnb.disk_image = GLOBALS.SRSLTE_IMG
 
 # write the RSpec file
 portal.context.printRequestRSpec()
