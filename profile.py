@@ -63,11 +63,16 @@ if_ue_sdr_to_compute = ue_sdr.addInterface("sdr_compute")
 if_ue_sdr_to_compute.addAddress( rspec.IPv4Address( "192.168.30.1", "255.255.255.0" ) )
 
 # request computational node for ue
-ue_compute = request.RawPC("ue_sdr")
+ue_compute = request.RawPC("ue_compute")
 ue_compute.hardware_type = "d430"
 ue_compute.disk_image = GLOBALS.SRSLTE_IMG
 if_ue_compute_to_sdr = ue_compute.addInterface("sdr_compute")
-if_ue_sdr_to_compute.addAddress( rspec.IPv4Address( "192.168.30.1", "255.255.255.0" ) )
+if_ue_compute_to_sdr.addAddress( rspec.IPv4Address( "192.168.30.1", "255.255.255.0" ) )
+
+# add the communication link ue <-> ue-compute
+link_ue_sdr = request.Link("sdr-ue")
+link_ue_sdr.addInterface(if_ue_sdr_to_compute)
+link_ue_sdr.addInterface(if_ue_compute_to_sdr)
 
 # write the RSpec file
 portal.context.printRequestRSpec()
