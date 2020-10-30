@@ -38,7 +38,7 @@ request = portal.context.makeRequestRSpec()
 gnb_sdr = request.RawPC( "gnb_sdr" )
 gnb_sdr.hardware_type = "sdr"
 # for now leaving the image to be the default image set by mapping algo
-# usrp_gnb.disk_image = URN.Image(PN.PNDEFS.PNET_AM, "emulab-ops:GENERICDEV-NOVLANS")
+# gnb_sdr.disk_image = URN.Image(PN.PNDEFS.PNET_AM, "emulab-ops:GENERICDEV-NOVLANS")
 if_gnb_sdr_to_compute = gnb_sdr.addInterface("sdr_compute")
 if_gnb_sdr_to_compute.addAddress( rspec.IPv4Address( "192.168.30.2", "255.255.255.0" ) )
 
@@ -47,12 +47,27 @@ gnb_compute = request.RawPC("gnb_compute")
 gnb_compute.hardware_type = "d430"
 gnb_compute.disk_image = GLOBALS.SRSLTE_IMG
 if_gnb_compute_to_sdr = gnb_compute.addInterface("compute_nuc")
-if_gnb_compute_to_sdr.addAddress(rspec.IPv4Address("192.168.30.1", "255.255.255.0"))
+if_gnb_compute_to_sdr.addAddress( rspec.IPv4Address("192.168.30.1", "255.255.255.0") )
 
 # add the communication link gnb <-> gnb-compute
 link_gnb_sdr = request.Link("sdr-gnb")
 link_gnb_sdr.addInterface(if_gnb_sdr_to_compute)
 link_gnb_sdr.addInterface(if_gnb_compute_to_sdr)
+
+# request the SDR for ue
+ue_sdr = request.RawPC("ue_sdr")
+ue_sdr.hardware_type = "sdr"
+# for now leaving the image to be the default image set by mapping algo
+# gnb_sdr.disk_image = URN.Image(PN.PNDEFS.PNET_AM, "emulab-ops:GENERICDEV-NOVLANS")
+if_ue_sdr_to_compute = ue_sdr.addInterface("sdr_compute")
+if_ue_sdr_to_compute.addAddress( rspec.IPv4Address( "192.168.30.1", "255.255.255.0" ) )
+
+# request computational node for ue
+ue_compute = request.RawPC("ue_sdr")
+ue_compute.hardware_type = "d430"
+ue_compute.disk_image = GLOBALS.SRSLTE_IMG
+if_ue_compute_to_sdr = ue_compute.addInterface("sdr_compute")
+if_ue_sdr_to_compute.addAddress( rspec.IPv4Address( "192.168.30.1", "255.255.255.0" ) )
 
 # write the RSpec file
 portal.context.printRequestRSpec()
